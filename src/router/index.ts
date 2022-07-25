@@ -1,30 +1,33 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Vue, { inject } from 'vue';
+import VueRouter from 'vue-router';
+import { entranceRoutes } from './entance';
+import { defaultRoutes } from './default';
+import { iocContainer } from '@/shared/ioc';
+import {} from 'inversify-props';
+import { FirebaseClient } from '@/shared/firebaseClient/interface/FirebaseClient';
+import { TYPES } from '@/shared/ioc/types';
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
+export const createAppRouter = (firebase: FirebaseClient): VueRouter => {
+  const routes = [...entranceRoutes, ...defaultRoutes];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
-});
+  const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes,
+  });
 
-export default router;
+  router.beforeEach((to, from, next) => {
+    const currentUser = firebase.firebaseClient?.currentUser;
+    console.log(currentUser, to);
+
+    if (!currentUser && to.name !== 'entrance-login') {
+      next('/login');
+    } else {
+      next();
+    }
+  });
+
+  return router;
+};

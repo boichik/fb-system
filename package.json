@@ -9,13 +9,21 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "element-ui": "^2.15.9",
+    "firebase": "^9.9.1",
+    "inversify": "^6.0.1",
+    "inversify-props": "^2.2.6",
+    "reflect-metadata": "^0.1.13",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.3",
+    "vue-i18n": "^9.1.10",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.1",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vuex-module-decorators": "^2.0.0"
   },
   "devDependencies": {
+    "@firebase/firestore-types": "^2.5.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",

@@ -1,0 +1,18 @@
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "semi": true,
+  "jsxBracketSameLine": true,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "*.vue",
+      "options": {
+        "parser": "vue",
+        "jsxBracketSameLine": true
+      }
+    }
+  ]
+}
